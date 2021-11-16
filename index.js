@@ -12,7 +12,7 @@ let weatherBtn = document.getElementById('submitBtn');
 weatherBtn.addEventListener('click', weatherCity);
 
 // Creating a function which is placed in the EventListener
-function weatherCity() {
+function weatherCity(e) {
     if (cityName.value == "") {
         alert('Please Enter City Name to get weather')
     }
@@ -22,7 +22,7 @@ function weatherCity() {
         let cityValue = cityName.value;
         // url = `http://api.weatherapi.com/v1/current.json?key=${apikey}=${cityName.value}&aqi=yes`
         url = `http://api.weatherapi.com/v1/current.json?key=6b3bf6db669b4be582982724212510&q=${cityValue}&aqi=yes`
-
+       
         fetch(url, {
             method: "GET",
             headers: { 'content-type': 'application/json' }
@@ -66,10 +66,11 @@ function weatherCity() {
         cityName.value = ""
         // calling showWeather() function which is show data in ui
        showWeather();
-
+       
+       e.preventDefault();
         setTimeout(() => {
             location.reload()
-        }, 1000);
+        }, 1500);
     };
 };
 // Creating a showWeather Function which get data from localstorage and show in ui
