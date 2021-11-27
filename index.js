@@ -22,7 +22,7 @@ function weatherCity(e) {
         let cityValue = cityName.value;
         // url = `http://api.weatherapi.com/v1/current.json?key=${apikey}=${cityName.value}&aqi=yes`
         url = `http://api.weatherapi.com/v1/current.json?key=6b3bf6db669b4be582982724212510&q=${cityValue}&aqi=yes`
-       
+
         fetch(url, {
             method: "GET",
             headers: { 'content-type': 'application/json' }
@@ -61,13 +61,13 @@ function weatherCity(e) {
             weathObj.push(myObj);
             // Setting data to lacalStorage in string format
             localStorage.setItem("weather", JSON.stringify(weathObj));
-         
+
         });
         cityName.value = ""
         // calling showWeather() function which is show data in ui
-       showWeather();
-       
-       e.preventDefault();
+        showWeather();
+
+        e.preventDefault();
         setTimeout(() => {
             location.reload()
         }, 1500);
@@ -84,7 +84,7 @@ function showWeather() {
     }
     let str = "";
     // Adding ForEach Loop to weatherObj for fetching all the elements inside weatherObj
-    weathObj.forEach(function(element,index){
+    weathObj.forEach(function (element, index) {
         str += `
                  <tr>
                  <td>${element.name}</td>
@@ -96,11 +96,11 @@ function showWeather() {
                  `
         let tbody = document.getElementById('tbody');
         tbody.innerHTML = str;
-        
+
     });
 }
 // Creating a delete function to delete item
-function deleteWeather(index){
+function deleteWeather(index) {
     let Weather = localStorage.getItem("weather");
     if (Weather == null) {
         weathObj = [];
@@ -109,16 +109,15 @@ function deleteWeather(index){
         weathObj = JSON.parse(Weather);
     }
     // adding splice method to weatherObj because its an array so we can add array methods on it
-    if(index == 0){
-        weathObj.splice(index,1);
+    if (index == 0) {
+        weathObj.splice(index, 1);
         location.reload()
     }
-    else
-    {
-        weathObj.splice(index,1);
+    else {
+        weathObj.splice(index, 1);
     }
     localStorage.setItem("weather", JSON.stringify(weathObj));
     // calling showWeather function
-    showWeather()  
+    showWeather()
 }
 showWeather() // calling showWeather() function universally (Important)
